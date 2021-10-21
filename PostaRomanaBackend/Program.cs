@@ -3,16 +3,14 @@ using MediatR;
 using MediatR.Pipeline;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PostaRomanaBackend.Data;
 using RatingSystem.Application;
 using RatingSystem.Application.Queries;
-using RatingSystem.Application.Services;
 using RatingSystem.Data;
 using RatingSystem.ExternalService;
-using RatingSystem.Models;
 using RatingSystem.PublishedLanguage.Commands;
 using RatingSystem.PublishedLanguage.Events;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -58,8 +56,7 @@ namespace RatingSystem
 
             // build
             var serviceProvider = services.BuildServiceProvider();
-            var database = serviceProvider.GetRequiredService<RatingDbContext>();
-            var ibanService = serviceProvider.GetRequiredService<NewIban>();
+            var database = serviceProvider.GetRequiredService<PostaRomanaContext>();
             var mediator = serviceProvider.GetRequiredService<IMediator>();
 
 

@@ -1,10 +1,7 @@
-﻿using Abstractions;
-using FluentValidation;
+﻿using FluentValidation;
 using MediatR;
-using RatingSystem.Data;
-using System;
+using PostaRomanaBackend.Data;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,7 +11,7 @@ namespace RatingSystem.Application.Queries
     {
         public class Validator : AbstractValidator<Query>
         {
-            public Validator(RatingDbContext _dbContext)
+            public Validator(PostaRomanaContext _dbContext)
             {
                 //RuleFor(q => q).Must(query =>
                 //{
@@ -36,9 +33,9 @@ namespace RatingSystem.Application.Queries
 
         public class QueryHandler : IRequestHandler<Query, List<Model>>
         {
-            private readonly RatingDbContext _dbContext;
+            private readonly PostaRomanaContext _dbContext;
 
-            public QueryHandler(RatingDbContext dbContext)
+            public QueryHandler(PostaRomanaContext dbContext)
             {
                 _dbContext = dbContext;
             }

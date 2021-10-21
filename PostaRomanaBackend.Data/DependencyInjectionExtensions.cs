@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using PostaRomanaBackend.Data;
 
 namespace RatingSystem.Data
 {
@@ -40,7 +41,7 @@ namespace RatingSystem.Data
             #endregion
             var connectionString = configuration.GetConnectionString("DefaultConnection");
             // services.AddDbContext<PaymentDbContext>(options => // better performance
-            services.AddDbContextPool<RatingDbContext>(options =>
+            services.AddDbContextPool<PostaRomanaContext>(options =>
             {
                 options.UseSqlServer(connectionString);
             });

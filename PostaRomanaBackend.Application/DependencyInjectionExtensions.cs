@@ -1,9 +1,6 @@
-﻿using Abstractions;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RatingSystem.Application.Services;
-using RatingSystem.Application.WriteOperations;
-using static RatingSystem.Application.Queries.ListOfAccounts;
+using PostaRomanaBackend.Data;
 
 namespace RatingSystem.Application
 {
@@ -18,9 +15,8 @@ namespace RatingSystem.Application
             //services.AddTransient<PurchaseProduct>();
             //services.AddTransient<QueryHandler>();
 
-            services.AddSingleton<NewIban>();
 
-            services.AddSingleton<Data.RatingDbContext>();
+            services.AddSingleton<PostaRomanaContext>();
 
             services.AddSingleton(sp =>
             {
