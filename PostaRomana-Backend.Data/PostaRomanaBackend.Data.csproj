@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PostaRomana-Backend.Models\PostaRomana-Backend.Models.csproj" />
+    <ProjectReference Include="..\PostaRomanaBackend.Models\PostaRomanaBackendPostaRomanaBackend.Models.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -17,9 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PostaRomana-Backend.Application\PostaRomana-Backend.Application.csproj" />
-    <ProjectReference Include="..\PostaRomana-Backend.ExternalService\PostaRomana-Backend.ExternalService.csproj" />
-    <ProjectReference Include="..\PostaRomana-Backend.PublishedLanguage\PostaRomana-Backend.PublishedLanguage.csproj" />
+    <ProjectReference Include="..\PostaRomanaBackend.Application\PostaRomanaBackendPostaRomanaBackend.Application.csproj" />
+    <ProjectReference Include="..\PostaRomanaBackend.ExternalService\PostaRomanaBackend.ExternalService.csproj" />
+    <ProjectReference Include="..\PostaRomanaBackend.PublishedLanguage\PostaRomanaBackendPostaRomanaBackend.PublishedLanguage.csproj" />
   </ItemGroup>
 
   <ItemGroup>

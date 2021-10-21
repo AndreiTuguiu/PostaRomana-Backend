@@ -4,13 +4,13 @@ VisualStudioVersion = 16.0.31727.386
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostaRomanaBackend", "PostaRomana-Backend\PostaRomanaBackend.csproj", "{BFA39359-B630-4E8A-B70A-3081B3675A8F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostaRomana-Backend.Models", "PostaRomana-Backend.Models\PostaRomana-Backend.Models.csproj", "{5966E494-5E5A-438A-A4FF-98F25F7B19EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostaRomanaBackend.Models", "PostaRomana-Backend.Models\PostaRomanaBackend.Models.csproj", "{5966E494-5E5A-438A-A4FF-98F25F7B19EA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostaRomana-Backend.Application", "PostaRomana-Backend.Application\PostaRomana-Backend.Application.csproj", "{AD3C9D80-A54E-47EB-B1D4-0DA42A085045}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostaRomanaBackend.Application", "PostaRomana-Backend.Application\PostaRomanaBackend.Application.csproj", "{AD3C9D80-A54E-47EB-B1D4-0DA42A085045}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostaRomana-Backend.Data", "PostaRomana-Backend.Data\PostaRomana-Backend.Data.csproj", "{18662A82-4FB1-458E-B905-873495FE3629}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostaRomanaBackend.Data", "PostaRomana-Backend.Data\PostaRomanaBackend.Data.csproj", "{18662A82-4FB1-458E-B905-873495FE3629}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostaRomana-Backend.PublishedLanguage", "PostaRomana-Backend.PublishedLanguage\PostaRomana-Backend.PublishedLanguage.csproj", "{AFB78D7D-32B1-48C9-9406-2C5C7F597EEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostaRomanaBackend.PublishedLanguage", "PostaRomana-Backend.PublishedLanguage\PostaRomanaBackend.PublishedLanguage.csproj", "{AFB78D7D-32B1-48C9-9406-2C5C7F597EEE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abstractions", "Abstractions\Abstractions.csproj", "{77ABDB4F-285E-43AE-813A-7EEA6C411B54}"
 EndProject
@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution 
 		NuGet.config = NuGet.config
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostaRomana-Backend.WebApi", "PostaRomana-Backend.WebApi\PostaRomana-Backend.WebApi.csproj", "{7E33C608-8498-453C-91E4-D897376A1D84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostaRomanaBackend.WebApi", "PostaRomana-Backend.WebApi\PostaRomanaBackend.WebApi.csproj", "{7E33C608-8498-453C-91E4-D897376A1D84}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

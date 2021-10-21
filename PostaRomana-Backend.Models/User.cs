@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PostaRomanaBackend.Models
 {
-    class Users
+    class User
 {
 }
 }

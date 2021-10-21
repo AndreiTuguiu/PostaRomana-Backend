@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -30,9 +30,9 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\PostaRomana-Backend.Application\PostaRomana-Backend.Application.csproj" />
-    <ProjectReference Include="..\PostaRomana-Backend.ExternalService\PostaRomana-Backend.ExternalService.csproj" />
-    <ProjectReference Include="..\PostaRomana-Backend.Models\PostaRomana-Backend.Models.csproj" />
+    <ProjectReference Include="..\PostaRomanaBackend.Application\PostaRomanaBackendPostaRomanaBackend.Application.csproj" />
+    <ProjectReference Include="..\PostaRomanaBackend.ExternalService\PostaRomanaBackend.ExternalService.csproj" />
+    <ProjectReference Include="..\PostaRomanaBackend.Models\PostaRomanaBackendPostaRomanaBackend.Models.csproj" />
   </ItemGroup>
 
 </Project>

@@ -13,8 +13,8 @@
   
   <ItemGroup>
     <ProjectReference Include="..\Abstractions\Abstractions.csproj" />
-    <ProjectReference Include="..\PostaRomana-Backend.Data\PostaRomana-Backend.Data.csproj" />
-    <ProjectReference Include="..\PostaRomana-Backend.PublishedLanguage\PostaRomana-Backend.PublishedLanguage.csproj" />
+    <ProjectReference Include="..\PostaRomanaBackend.Data\PostaRomanaBackendPostaRomanaBackend.Data.csproj" />
+    <ProjectReference Include="..\PostaRomanaBackend.PublishedLanguage\PostaRomanaBackendPostaRomanaBackend.PublishedLanguage.csproj" />
   </ItemGroup>
   
   <ItemGroup>
