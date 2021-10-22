@@ -20,6 +20,13 @@ namespace PostaRomanaBackend.WebApi.Controllers
         }
 
         [HttpPost]
+        [Route("Create")]
+        public async Task<string> CreateAccount(AccountRegisterMade command, CancellationToken cancellationToken)
+        {
+            await _mediator.Send(command, cancellationToken);
+            return "OK";
+        }
+        [HttpPost]
         [Route("LogIn")]
         public async Task<string> CreateSession(UserSessionCreated USC, CancellationToken cancellationToken)
         {

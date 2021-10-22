@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using PostaRomanaBackend.Data;
+using PostaRomanaBackend.Models;
 using PostaRomanaBackend.PublishedLanguage.Commands;
 using PostaRomanaBackend.PublishedLanguage.Events;
 using System;
@@ -21,19 +22,26 @@ namespace PostaRomanaBackend.Application.CommandHandlers
             _mediator = mediator;
             _dbContext = dbContext;
         }
-        public Task<Unit> Handle(MakeAccount request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(MakeAccount request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var user = new User
+            {
+                Username = request.Username,
+                Password = request.Password,
+                Email = request.Email,
+                FullName = request.FullName,
+                IsActive = request.isActive,
+            };
+
+            _dbContext.Users.Add(user);
+            _dbContext.SaveChanges();
+
+            AccountRegisterMade eventAccountEvent = new(request.Username, request.Password, request.Email, request.FullName, request.isActive);
+            await _mediator.Publish(eventAccountEvent, cancellationToken);
+            return Unit.Value;
+
         }
 
-        public Task<Unit> Handle(AccountMade request, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Unit> Handle(AccountRegisterMade request, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
