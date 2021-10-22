@@ -28,7 +28,8 @@ namespace PostaRomanaBackend.Application.CommandHandlers
                     .Locations
                     .FirstOrDefault(x => x.CountryId == request.CountryId
                                     && x.CountyId == request.CountyId
-                                    && x.CityId == request.CityId);
+                                    && x.CityId == request.CityId 
+                                    && x.AddressLine == request.AddressLine);
             if (loc == null)
             {
                 loc = new Location()
