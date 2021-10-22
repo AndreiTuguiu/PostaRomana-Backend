@@ -1,13 +1,14 @@
 ﻿using FluentValidation;
 using MediatR;
 using PostaRomanaBackend.Data;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace RatingSystem.Application.Queries
 {
-    public class ListOfAccounts
+    public class ListOfEvents
     {
         public class Validator : AbstractValidator<Query>
         {
@@ -27,8 +28,9 @@ namespace RatingSystem.Application.Queries
 
         public class Query : IRequest<List<Model>>
         {
-            public int? PersonId { get; set; }
-            public string Cnp { get; set; }
+            public string Name { get; set; }
+            public DateTime StartDate { get; set; }
+            public DateTime EndDate { get; set; }
         }
 
         public class QueryHandler : IRequestHandler<Query, List<Model>>
@@ -50,12 +52,13 @@ namespace RatingSystem.Application.Queries
         public class Model
         {
             public int Id { get; set; }
-            public decimal Balance { get; set; }
-            public string Currency { get; set; }
-            public string Iban { get; set; }
-            public string Status { get; set; }
-            public decimal? Limit { get; set; }
-            public string Type { get; set; }
+            public string Name { get; set; }
+            public DateTime StartDate { get; set; }
+            public DateTime EndDate { get; set; }
+            public int LocationId { get; set; }
+            public int OrganizerId { get; set; }
+            public decimal? Cost { get; set; }
+            public int EventTypeId { get; set; }
         }
     }
 }

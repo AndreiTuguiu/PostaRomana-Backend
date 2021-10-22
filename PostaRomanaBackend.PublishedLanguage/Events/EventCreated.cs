@@ -2,7 +2,7 @@
 
 namespace RatingSystem.PublishedLanguage.Events
 {
-    public class AccountMade: INotification
+    public class EventCreated: INotification
     {
         public string Name { get; set; }
     }

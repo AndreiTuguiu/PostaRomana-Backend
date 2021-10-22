@@ -7,10 +7,7 @@ namespace PostaRomanaBackend.Data
 {
     public partial class PostaRomanaContext : DbContext
     {
-        public PostaRomanaContext()
-        {
-        }
-
+      
         public PostaRomanaContext(DbContextOptions<PostaRomanaContext> options)
             : base(options)
         {

@@ -20,7 +20,7 @@ namespace RatingSystem.WebApi.Controllers
 
         [HttpPost]
         [Route("Create")]
-        public async Task<string> CreateAccount(MakeNewAccount command, CancellationToken cancellationToken)
+        public async Task<string> CreateAccount(EditEvent command, CancellationToken cancellationToken)
         {
             await _mediator.Send(command, cancellationToken);
             return "OK";
@@ -30,7 +30,7 @@ namespace RatingSystem.WebApi.Controllers
         [Route("ListOfAccounts")]
         // query: http://localhost:5000/api/Account/ListOfAccounts?PersonId=1&Cnp=1961231..
         // route: http://localhost:5000/api/Account/ListOfAccounts/1/1961231..
-        public async Task<List<ListOfAccounts.Model>> GetListOfAccounts([FromQuery] ListOfAccounts.Query query, CancellationToken cancellationToken)
+        public async Task<List<ListOfEvents.Model>> GetListOfAccounts([FromQuery] ListOfEvents.Query query, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(query, cancellationToken);
             return result;

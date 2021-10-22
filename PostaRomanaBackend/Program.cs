@@ -38,7 +38,7 @@ namespace RatingSystem
             services.AddPaymentDataAccess(Configuration);
 
             services.Scan(scan => scan
-                .FromAssemblyOf<ListOfAccounts>()
+                .FromAssemblyOf<ListOfEvents>()
                 .AddClasses(classes => classes.AssignableTo<IValidator>())
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
@@ -48,9 +48,9 @@ namespace RatingSystem
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestPostProcessorBehavior<,>));
             services.AddScoped(typeof(IRequestPreProcessor<>), typeof(ValidationPreProcessor<>));
 
-            services.AddScopedContravariant<INotificationHandler<INotification>, AllEventsHandler>(typeof(AccountMade).Assembly);
+            services.AddScopedContravariant<INotificationHandler<INotification>, AllEventsHandler>(typeof(EventCreated).Assembly);
 
-            services.AddMediatR(new[] { typeof(ListOfAccounts).Assembly, typeof(AllEventsHandler).Assembly }); // get all IRequestHandler and INotificationHandler classes
+            services.AddMediatR(new[] { typeof(ListOfEvents).Assembly, typeof(AllEventsHandler).Assembly }); // get all IRequestHandler and INotificationHandler classes
 
             services.AddSingleton(Configuration);
 
@@ -60,21 +60,20 @@ namespace RatingSystem
             var mediator = serviceProvider.GetRequiredService<IMediator>();
 
 
-            var makeAccountDetails = new MakeNewAccount
+            //var makeAccountDetails = new NewEvent
+            //{
+            //    UniqueIdentifier = "23",
+            //    AccountType = "Debit",
+            //    Valuta = "Eur"
+            //};
+
+
+            //await mediator.Send(makeAccountDetails, cancellationToken);
+
+
+
+            var query = new Application.Queries.ListOfEvents.Query
             {
-                UniqueIdentifier = "23",
-                AccountType = "Debit",
-                Valuta = "Eur"
-            };
-
-
-            await mediator.Send(makeAccountDetails, cancellationToken);
-
-
-
-            var query = new Application.Queries.ListOfAccounts.Query
-            {
-                PersonId = 1
             };
 
             var result = await mediator.Send(query, cancellationToken);
