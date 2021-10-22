@@ -3,13 +3,12 @@ using MediatR;
 using MediatR.Pipeline;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PostaRomanaBackend.Application.Queries;
 using PostaRomanaBackend.Data;
+using PostaRomanaBackend.PublishedLanguage.Events;
 using RatingSystem.Application;
-using RatingSystem.Application.Queries;
 using RatingSystem.Data;
 using RatingSystem.ExternalService;
-using RatingSystem.PublishedLanguage.Commands;
-using RatingSystem.PublishedLanguage.Events;
 using System;
 using System.IO;
 using System.Threading;
@@ -72,11 +71,9 @@ namespace RatingSystem
 
 
 
-            var query = new Application.Queries.ListOfEvents.Query
-            {
-            };
+            
 
-            var result = await mediator.Send(query, cancellationToken);
+            
 
 
         }

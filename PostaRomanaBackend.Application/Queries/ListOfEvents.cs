@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RatingSystem.Application.Queries
+namespace PostaRomanaBackend.Application.Queries
 {
     public class ListOfEvents
     {

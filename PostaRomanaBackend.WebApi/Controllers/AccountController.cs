@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RatingSystem.Application.Queries;
-using RatingSystem.PublishedLanguage.Commands;
+using PostaRomanaBackend.Application.Queries;
+using PostaRomanaBackend.PublishedLanguage.Commands;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RatingSystem.WebApi.Controllers
+namespace PostaRomanaBackend.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -18,13 +18,13 @@ namespace RatingSystem.WebApi.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
-        [Route("Create")]
-        public async Task<string> CreateAccount(EditEvent command, CancellationToken cancellationToken)
-        {
-            await _mediator.Send(command, cancellationToken);
-            return "OK";
-        }
+        //[HttpPost]
+        //[Route("Create")]
+        //public async Task<string> CreateAccount(EditEvent command, CancellationToken cancellationToken)
+        //{
+        //    await _mediator.Send(command, cancellationToken);
+        //    return "OK";
+        //}
 
         [HttpGet]
         [Route("ListOfAccounts")]

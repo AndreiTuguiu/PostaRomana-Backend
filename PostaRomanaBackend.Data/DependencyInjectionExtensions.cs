@@ -7,7 +7,7 @@ namespace RatingSystem.Data
 {
     public static class DependencyInjectionExtensions
     {
-        public static void AddPaymentDataAccess(this IServiceCollection services, IConfiguration configuration)
+        public static void AddPostaRomanaDataAccess(this IServiceCollection services, IConfiguration configuration)
         {
             #region db selector code
             /*

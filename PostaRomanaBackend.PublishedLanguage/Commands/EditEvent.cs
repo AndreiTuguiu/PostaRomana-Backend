@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using System;
 
-namespace RatingSystem.PublishedLanguage.Commands
+namespace PostaRomanaBackend.PublishedLanguage.Commands
 {
     public class EditEvent : IRequest
     {
@@ -14,5 +14,6 @@ namespace RatingSystem.PublishedLanguage.Commands
         public string AddressLine { get; set; }
         public decimal? Cost { get; set; }
         public int EventTypeId { get; set; }
+        public int OrganizerId { get; set; }
     }
 }
