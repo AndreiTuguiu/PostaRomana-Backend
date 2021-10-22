@@ -18,6 +18,7 @@ namespace PostaRomanaBackend.Data
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Register> Registers { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserSession> UserSessions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -123,6 +124,23 @@ namespace PostaRomanaBackend.Data
                 entity.Property(e => e.Username)
                     .IsRequired()
                     .HasMaxLength(50);
+                
+            });
+
+            modelBuilder.Entity<UserSession>(entity =>
+            {
+                
+
+                entity.ToTable("UserSessions");
+
+                entity.HasIndex(e => e.Id, "UQ_SessionId")
+                            .IsUnique();
+
+                entity.Property(e => e.SessionName)
+                            .IsRequired()
+                            .HasMaxLength(50);
+                entity.Property(e => e.ValidTo).HasColumnType("datetime");
+                            
             });
 
             OnModelCreatingPartial(modelBuilder);
