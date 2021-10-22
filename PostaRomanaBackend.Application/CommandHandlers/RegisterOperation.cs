@@ -12,37 +12,31 @@ using System.Threading.Tasks;
 
 namespace PostaRomanaBackend.Application.CommandHandlers
 {
-    public class CreateAccountOperation : IRequestHandler<MakeAccount>
+    public class RegisterOperation : IRequestHandler<MakeRegister>
     {
         private readonly IMediator _mediator;
         private readonly PostaRomanaContext _dbContext;
 
-        public CreateAccountOperation(IMediator mediator, PostaRomanaContext dbContext)
+        public RegisterOperation(IMediator mediator, PostaRomanaContext dbContext)
         {
             _mediator = mediator;
             _dbContext = dbContext;
         }
-        public async Task<Unit> Handle(MakeAccount request, CancellationToken cancellationToken)
+
+        public async Task<Unit> Handle(MakeRegister request, CancellationToken cancellationToken)
         {
-            var user = new User
+            var registerToken = new Register
             {
-                Username = request.Username,
-                Password = request.Password,
-                Email = request.Email,
-                FullName = request.FullName,
-                IsActive = false,
+                Token = request.Token
             };
 
-            _dbContext.Users.Add(user);
-            
+            _dbContext.Registers.Add(registerToken);
 
-            AccountRegisterMade eventAccountEvent = new(request.Username, request.Password, request.Email, request.FullName, false);
+            RegisterMade eventAccountEvent = new(request.Token);
             await _mediator.Publish(eventAccountEvent, cancellationToken);
             _dbContext.SaveChanges();
             return Unit.Value;
-
         }
 
-       
     }
 }

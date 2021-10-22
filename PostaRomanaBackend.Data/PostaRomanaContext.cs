@@ -124,13 +124,15 @@ namespace PostaRomanaBackend.Data
                 entity.Property(e => e.Username)
                     .IsRequired()
                     .HasMaxLength(50);
+
+                entity.Property(e => e.SessionId);
                 
+              
             });
 
             modelBuilder.Entity<UserSession>(entity =>
             {
                 
-
                 entity.ToTable("UserSessions");
 
                 entity.HasIndex(e => e.Id, "UQ_SessionId")
