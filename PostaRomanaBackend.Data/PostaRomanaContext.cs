@@ -7,10 +7,7 @@ namespace PostaRomanaBackend.Data
 {
     public partial class PostaRomanaContext : DbContext
     {
-        public PostaRomanaContext()
-        {
-        }
-
+      
         public PostaRomanaContext(DbContextOptions<PostaRomanaContext> options)
             : base(options)
         {
@@ -37,7 +34,7 @@ namespace PostaRomanaBackend.Data
 
             modelBuilder.Entity<Event>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id);
 
                 entity.Property(e => e.Cost).HasColumnType("money");
 
@@ -79,7 +76,7 @@ namespace PostaRomanaBackend.Data
 
             modelBuilder.Entity<Location>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id);
 
                 entity.Property(e => e.AddressLine).HasMaxLength(50);
             });
@@ -107,7 +104,7 @@ namespace PostaRomanaBackend.Data
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id);
 
                 entity.Property(e => e.Email)
                     .IsRequired()

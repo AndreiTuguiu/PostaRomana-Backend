@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace RatingSystem.WebApi.Middleware
+namespace PostaRomanaBackend.WebApi.Middleware
 {
     public class ErrorMiddleware
     {
@@ -20,7 +20,14 @@ namespace RatingSystem.WebApi.Middleware
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
+                while (ex != null && ex.InnerException != null)
+                {
+                    Console.WriteLine(ex.InnerException.Message);
+                    Console.WriteLine(ex.InnerException.StackTrace);
+                    ex = ex.InnerException;
+                }
             }
         }
     }

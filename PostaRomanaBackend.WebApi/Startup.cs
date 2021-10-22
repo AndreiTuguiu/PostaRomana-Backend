@@ -5,13 +5,15 @@ using Microsoft.Extensions.DependencyInjection;
 using RatingSystem.Application;
 using RatingSystem.WebApi.Swagger;
 using MediatR;
-using RatingSystem.Application.Queries;
 using RatingSystem.ExternalService;
-using RatingSystem.PublishedLanguage.Events;
 using MediatR.Pipeline;
 using FluentValidation;
 using RatingSystem.WebApi.MediatorPipeline;
-using RatingSystem.WebApi.Middleware;
+using PostaRomanaBackend.Application.Queries;
+using PostaRomanaBackend.PublishedLanguage.Events;
+using PostaRomanaBackend.WebApi.Middleware;
+using PostaRomanaBackend.Application.CommandHandlers;
+using RatingSystem.Data;
 
 namespace RatingSystem.WebApi
 {
@@ -30,19 +32,20 @@ namespace RatingSystem.WebApi
             services.AddMvc(o => o.EnableEndpointRouting = false);
 
             services.Scan(scan => scan
-                .FromAssemblyOf<ListOfAccounts>()
+                .FromAssemblyOf<ListOfEvents>()
                 .AddClasses(classes => classes.AssignableTo<IValidator>())
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
 
-            services.AddMediatR(new[] { typeof(ListOfAccounts).Assembly, typeof(AllEventsHandler).Assembly }); // get all IRequestHandler and INotificationHandler classes
+            services.AddMediatR(new[] { typeof(ListOfEvents).Assembly, typeof(AllEventsHandler).Assembly }); // get all IRequestHandler and INotificationHandler classes
+            
 
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestPreProcessorBehavior<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestPostProcessorBehavior<,>));
             services.AddScoped(typeof(IRequestPreProcessor<>), typeof(ValidationPreProcessor<>));
 
-            services.AddScopedContravariant<INotificationHandler<INotification>, AllEventsHandler>(typeof(AccountMade).Assembly);
-
+            services.AddScopedContravariant<INotificationHandler<INotification>, AllEventsHandler>(typeof(EventCreated).Assembly);
+            services.AddPostaRomanaDataAccess(Configuration);
             services.RegisterBusinessServices(Configuration);
             services.AddSwagger(Configuration["Identity:Authority"]);
 
