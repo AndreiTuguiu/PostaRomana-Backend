@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PostaRomanaBackend.Application.Queries;
 using PostaRomanaBackend.PublishedLanguage.Commands;
+using PostaRomanaBackend.PublishedLanguage.Events;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,13 +19,13 @@ namespace PostaRomanaBackend.WebApi.Controllers
             _mediator = mediator;
         }
 
-        //[HttpPost]
-        //[Route("Create")]
-        //public async Task<string> CreateAccount(EditEvent command, CancellationToken cancellationToken)
-        //{
-        //    await _mediator.Send(command, cancellationToken);
-        //    return "OK";
-        //}
+        [HttpPost]
+        [Route("Create")]
+        public async Task<string> CreateAccount(AccountRegisterMade command, CancellationToken cancellationToken)
+        {
+            await _mediator.Send(command, cancellationToken);
+            return "OK";
+        }
 
         [HttpGet]
         [Route("ListOfAccounts")]

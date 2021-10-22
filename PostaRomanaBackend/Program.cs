@@ -34,7 +34,7 @@ namespace RatingSystem
             var source = new CancellationTokenSource();
             var cancellationToken = source.Token;
             services.RegisterBusinessServices(Configuration);
-            services.AddPaymentDataAccess(Configuration);
+            //services.AddPaymentDataAccess(Configuration);
 
             services.Scan(scan => scan
                 .FromAssemblyOf<ListOfEvents>()

@@ -4,7 +4,7 @@
 
 namespace PostaRomanaBackend.Models
 {
-    public partial class User
+    public class User
     {
         public User()
         {

@@ -12,12 +12,15 @@ namespace PostaRomanaBackend.PublishedLanguage.Events
         public string Username { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-
-        public AccountRegisterMade(string Username, string Password, string Email)
+        public string FullName { get; set; }
+        public bool IsActive { get; set; }
+        public AccountRegisterMade(string Username, string Password, string Email, string FullName, bool IsActive)
         {
-            Username = Username;
-            Password = Password;
-            Email = Email;
+            this.Username = Username;
+            this.Password = Password;
+            this.Email = Email;
+            this.FullName = FullName;
+            this.IsActive = IsActive;
         }
     }
 }
