@@ -9,7 +9,7 @@ namespace PostaRomanaBackend.Application
 {
     public class FiveCharacterCodeGenerator
     {
-        public string GenerateSessionId()
+        public static string GenerateToken()
         {
             var builder = new StringBuilder();
             for (int i = 1; i <= 5; i++)

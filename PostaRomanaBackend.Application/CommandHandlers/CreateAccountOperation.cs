@@ -34,7 +34,7 @@ namespace PostaRomanaBackend.Application.CommandHandlers
                 IsActive = false,
             };
 
-            string token = TokenGenerator.generateToken();
+            string token = FiveCharacterCodeGenerator.GenerateToken();
             EmailSender.sendEmail(user.Email, token);
 
             user.Registers.Add(new Register()
