@@ -28,7 +28,7 @@ namespace PostaRomanaBackend.WebApi.Controllers
         }
         [HttpPost]
         [Route("LogIn")]
-        public async Task<string> CreateSession(UserSessionCreated USC, CancellationToken cancellationToken)
+        public async Task<string> CreateSession(LogInUser USC, CancellationToken cancellationToken)
         {
             await _mediator.Send(USC, cancellationToken);
             return "OK";
