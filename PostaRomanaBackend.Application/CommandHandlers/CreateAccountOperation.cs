@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using PostaRomanaBackend.Application.Helpers;
 using PostaRomanaBackend.Data;
 using PostaRomanaBackend.Models;
 using PostaRomanaBackend.PublishedLanguage.Commands;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace PostaRomanaBackend.Application.CommandHandlers
 {
-    public class CreateAccountOperation : IRequestHandler<MakeAccount>
+    public class CreateAccountOperation : IRequestHandler<MakeAccountCommand>
     {
         private readonly IMediator _mediator;
         private readonly PostaRomanaContext _dbContext;
@@ -22,7 +23,7 @@ namespace PostaRomanaBackend.Application.CommandHandlers
             _mediator = mediator;
             _dbContext = dbContext;
         }
-        public async Task<Unit> Handle(MakeAccount request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(MakeAccountCommand request, CancellationToken cancellationToken)
         {
             var user = new User
             {
@@ -33,16 +34,27 @@ namespace PostaRomanaBackend.Application.CommandHandlers
                 IsActive = false,
             };
 
-            _dbContext.Users.Add(user);
-            
+            string token = TokenGenerator.generateToken();
+            EmailSender.sendEmail(user.Email, token);
 
-            AccountRegisterMade eventAccountEvent = new(request.Username, request.Password, request.Email, request.FullName, false);
-            await _mediator.Publish(eventAccountEvent, cancellationToken);
-            _dbContext.SaveChanges();
+            user.Registers.Add(new Register()
+            {
+                Token = token,
+                TokenStatus = "...",
+
+                // Id ??? posibil sa se genereze automat
+                ValidTo = DateTime.Now.AddDays(1)
+            });
+
+            await _dbContext.Users.AddAsync(user);
+            await _dbContext.SaveChangesAsync();
+
+            //AccountRegisterMade eventAccountEvent = new(request.Username, request.Password, request.Email, request.FullName, false);
+            //await _mediator.Publish(eventAccountEvent, cancellationToken);
             return Unit.Value;
 
         }
 
-       
+
     }
 }

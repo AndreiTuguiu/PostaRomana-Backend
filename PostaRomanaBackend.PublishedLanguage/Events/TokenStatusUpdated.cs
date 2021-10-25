@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace PostaRomanaBackend.PublishedLanguage.Events
 {
-    public class RegisterMade : INotification
+    public class TokenStatusUpdated : INotification
     {
-        public string Token;
+        public string Token { get; set; }
 
-        public RegisterMade(string Token)
+        public TokenStatusUpdated(string Token)
         {
             this.Token = Token;
         }

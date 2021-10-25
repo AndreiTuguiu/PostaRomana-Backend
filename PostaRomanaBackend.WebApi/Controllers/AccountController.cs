@@ -21,16 +21,25 @@ namespace PostaRomanaBackend.WebApi.Controllers
 
         [HttpPost]
         [Route("Create")]
-        public async Task<string> CreateAccount(MakeAccount ma, CancellationToken cancellationToken)
+        public async Task<string> CreateAccount(MakeAccountCommand ma, CancellationToken cancellationToken)
         {
             await _mediator.Send(ma, cancellationToken);
             return "OK";
         }
+
         [HttpPost]
         [Route("LogIn")]
         public async Task<string> CreateSession(UserSessionCreated USC, CancellationToken cancellationToken)
         {
             await _mediator.Send(USC, cancellationToken);
+            return "OK";
+        }
+
+        [HttpPost]
+        [Route("Token")]
+        public async Task<string> UpdateTokenStatus(UpdateTokenStatusCommand tsu, CancellationToken cancellationToken)
+        {
+            await _mediator.Send(tsu, cancellationToken);
             return "OK";
         }
 

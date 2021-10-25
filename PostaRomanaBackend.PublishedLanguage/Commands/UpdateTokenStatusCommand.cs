@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace PostaRomanaBackend.PublishedLanguage.Commands
 {
-   public class MakeRegister : IRequest
+   public class UpdateTokenStatusCommand : IRequest
     {
-        public string Token;
+        public string Token { get; set; }
     }
 }

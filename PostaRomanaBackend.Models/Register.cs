@@ -11,7 +11,6 @@ namespace PostaRomanaBackend.Models
         public DateTime ValidTo { get; set; }
         public int UserId { get; set; }
         public string Token { get; set; }
-
         public virtual User User { get; set; }
     }
 }

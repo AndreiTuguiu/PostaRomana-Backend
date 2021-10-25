@@ -12,27 +12,29 @@ using System.Threading.Tasks;
 
 namespace PostaRomanaBackend.Application.CommandHandlers
 {
-    public class RegisterOperation : IRequestHandler<MakeRegister>
+    public class UpdateTokenStatusOperation : IRequestHandler<UpdateTokenStatusCommand>
     {
         private readonly IMediator _mediator;
         private readonly PostaRomanaContext _dbContext;
 
-        public RegisterOperation(IMediator mediator, PostaRomanaContext dbContext)
+        public UpdateTokenStatusOperation(IMediator mediator, PostaRomanaContext dbContext)
         {
             _mediator = mediator;
             _dbContext = dbContext;
         }
 
-        public async Task<Unit> Handle(MakeRegister request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateTokenStatusCommand request, CancellationToken cancellationToken)
         {
-            var registerToken = new Register
+            Register register = _dbContext.Registers.FirstOrDefault(x => x.Token == request.Token);
+
+            if (register == null)
             {
-                Token = request.Token
-            };
+                throw new Exception("Token not found");
+            }
 
-            _dbContext.Registers.Add(registerToken);
+            register.TokenStatus = "noul status";
 
-            RegisterMade eventAccountEvent = new(request.Token);
+            TokenStatusUpdated eventAccountEvent = new(request.Token);
             await _mediator.Publish(eventAccountEvent, cancellationToken);
             _dbContext.SaveChanges();
             return Unit.Value;
