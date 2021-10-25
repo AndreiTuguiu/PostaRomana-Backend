@@ -49,6 +49,8 @@ namespace PostaRomanaBackend.Data
 
                 entity.Property(e => e.StartDate).HasColumnType("datetime");
 
+                entity.Property(e => e.Description).HasMaxLength(300);
+
                 entity.HasOne(d => d.Location)
                     .WithMany(p => p.Events)
                     .HasForeignKey(d => d.LocationId)

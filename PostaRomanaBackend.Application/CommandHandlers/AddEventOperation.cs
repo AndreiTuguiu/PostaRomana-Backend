@@ -63,7 +63,8 @@ namespace PostaRomanaBackend.Application.CommandHandlers
                     EventTypeId = request.EventTypeId,
                     LocationId=loc.Id,
                     Cost = request.Cost,
-                    OrganizerId=request.OrganizerId
+                    OrganizerId=request.OrganizerId,
+                    Description=request.Description
                 };
                 _dbcontext.Events.Add(ev);
 
@@ -75,7 +76,8 @@ namespace PostaRomanaBackend.Application.CommandHandlers
                     EventTypeId=ev.EventTypeId,
                     LocationId=ev.LocationId,
                     Cost=ev.Cost,
-                    OrganizerId=ev.OrganizerId
+                    OrganizerId=ev.OrganizerId,
+                    Description=ev.Description
                 };
 
                 await _mediator.Publish(eventCreated, cancellationToken);
@@ -88,6 +90,7 @@ namespace PostaRomanaBackend.Application.CommandHandlers
                 ev.EndDate = request.EndDate;
                 ev.EventTypeId = request.EventTypeId;
                 ev.Cost = request.Cost;
+                ev.Description = request.Description;
 
                 EventEdited eventEdited = new()
                 {
@@ -96,7 +99,8 @@ namespace PostaRomanaBackend.Application.CommandHandlers
                     StartDate = ev.StartDate,
                     EndDate = ev.EndDate,
                     EventTypeId = ev.EventTypeId,
-                    Cost = ev.Cost
+                    Cost = ev.Cost,
+                    Description=ev.Description
                 };
 
                 await _mediator.Publish(eventEdited, cancellationToken);
