@@ -3,19 +3,18 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RatingSystem.Application;
-using RatingSystem.WebApi.Swagger;
 using MediatR;
-using RatingSystem.ExternalService;
 using MediatR.Pipeline;
 using FluentValidation;
-using RatingSystem.WebApi.MediatorPipeline;
 using PostaRomanaBackend.Application.Queries;
 using PostaRomanaBackend.PublishedLanguage.Events;
 using PostaRomanaBackend.WebApi.Middleware;
-using PostaRomanaBackend.Application.CommandHandlers;
-using RatingSystem.Data;
+using PostaRomanaBackend.WebApi.MediatorPipeline;
+using PostaRomanaBackend.ExternalService;
+using PostaRomanaBackend.Data;
+using PostaRomanaBackend.WebApi.Swagger;
 
-namespace RatingSystem.WebApi
+namespace PostaRomanaBackend.WebApi
 {
     public class Startup
     {

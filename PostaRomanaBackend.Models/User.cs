@@ -11,6 +11,7 @@ namespace PostaRomanaBackend.Models
         {
             EventXusers = new HashSet<EventXuser>();
             Registers = new HashSet<Register>();
+
         }
 
         public int Id { get; set; }
@@ -23,5 +24,7 @@ namespace PostaRomanaBackend.Models
 
         public virtual ICollection<EventXuser> EventXusers { get; set; }
         public virtual ICollection<Register> Registers { get; set; }
+
+        
     }
 }

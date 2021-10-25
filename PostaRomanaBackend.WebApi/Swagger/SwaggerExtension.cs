@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
-namespace RatingSystem.WebApi.Swagger
+namespace PostaRomanaBackend.WebApi.Swagger
 {
     public static class SwaggerExtension
     {

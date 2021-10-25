@@ -5,7 +5,7 @@ using Serilog;
 using System;
 using System.IO;
 
-namespace RatingSystem.WebApi
+namespace PostaRomanaBackend.WebApi
 {
     class Program
     {
