@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using PostaRomanaBackend.Data;
 
-namespace RatingSystem.Data
+namespace PostaRomanaBackend.Data
 {
     public static class DependencyInjectionExtensions
     {

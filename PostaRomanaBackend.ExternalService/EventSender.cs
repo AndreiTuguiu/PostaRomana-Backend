@@ -3,7 +3,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RatingSystem.ExternalService
+namespace PostaRomanaBackend.ExternalService
 {
     public class AllEventsHandler : INotificationHandler<INotification>
     {
