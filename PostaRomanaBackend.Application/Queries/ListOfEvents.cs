@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 using PostaRomanaBackend.Data;
+using PostaRomanaBackend.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -26,14 +27,14 @@ namespace PostaRomanaBackend.Application.Queries
         }
        
 
-        public class Query : IRequest<List<Model>>
+        public class Query : IRequest<List<Event>>
         {
-            public string Name { get; set; }
+            public int EventTypeId { get; set; }
             public DateTime StartDate { get; set; }
             public DateTime EndDate { get; set; }
         }
 
-        public class QueryHandler : IRequestHandler<Query, List<Model>>
+        public class QueryHandler : IRequestHandler<Query, List<Event>>
         {
             private readonly PostaRomanaContext _dbContext;
 
@@ -42,23 +43,13 @@ namespace PostaRomanaBackend.Application.Queries
                 _dbContext = dbContext;
             }
 
-            public Task<List<Model>> Handle(Query request, CancellationToken cancellationToken)
+            public Task<List<Event>> Handle(Query request, CancellationToken cancellationToken)
             {
-                // TODO: implement logic
+                
                 return null;
             }
         }
 
-        public class Model
-        {
-            public int Id { get; set; }
-            public string Name { get; set; }
-            public DateTime StartDate { get; set; }
-            public DateTime EndDate { get; set; }
-            public int LocationId { get; set; }
-            public int OrganizerId { get; set; }
-            public decimal? Cost { get; set; }
-            public int EventTypeId { get; set; }
-        }
+        
     }
 }
