@@ -14,6 +14,8 @@ using PostaRomanaBackend.PublishedLanguage.Events;
 using PostaRomanaBackend.WebApi.Middleware;
 using PostaRomanaBackend.Application.CommandHandlers;
 using RatingSystem.Data;
+using Abstractions;
+using PostaRomanaBackend.Data.Repositories;
 
 namespace RatingSystem.WebApi
 {
@@ -37,8 +39,9 @@ namespace RatingSystem.WebApi
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
 
-            services.AddMediatR(new[] { typeof(ListOfEvents).Assembly, typeof(AllEventsHandler).Assembly }); // get all IRequestHandler and INotificationHandler classes
             
+            services.AddMediatR(new[] { typeof(ListOfEvents).Assembly, typeof(AllEventsHandler).Assembly }); // get all IRequestHandler and INotificationHandler classes
+            services.AddScoped(typeof(IEventRepository), typeof(EventRepositories));
 
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestPreProcessorBehavior<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestPostProcessorBehavior<,>));

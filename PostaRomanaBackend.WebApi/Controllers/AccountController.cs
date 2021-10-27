@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PostaRomanaBackend.Application.Queries;
+using PostaRomanaBackend.Models;
 using PostaRomanaBackend.PublishedLanguage.Commands;
 using PostaRomanaBackend.PublishedLanguage.Events;
 using System.Collections.Generic;
@@ -35,10 +36,10 @@ namespace PostaRomanaBackend.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("ListOfAccounts")]
-        // query: http://localhost:5000/api/Account/ListOfAccounts?PersonId=1&Cnp=1961231..
+        [Route("ListOfEvents")]
+        // query: http://localhost:5000/api/Account/ListOfEvents?PersonId=1&Cnp=1961231..
         // route: http://localhost:5000/api/Account/ListOfAccounts/1/1961231..
-        public async Task<List<ListOfEvents.Model>> GetListOfAccounts([FromQuery] ListOfEvents.Query query, CancellationToken cancellationToken)
+        public async Task<List<Event>> GetListOfEvents([FromQuery] EventQueryCommand query, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(query, cancellationToken);
             return result;
