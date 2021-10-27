@@ -25,19 +25,29 @@ namespace PostaRomanaBackend.Application.CommandHandlers
         public async Task<Unit> Handle(LogInUser request, CancellationToken cancellationToken)
         {
             var userSession = new UserSession
-            {
-                Id = request.Id,
-                SessionName = request.SessionName,
-                ValidTo = request.ValidTo
-
+            {    UserId = request.UserId,
+                 ValidTo = DateTime.Now.AddMinutes(10)
             };
 
-            _dbContext.UserSessions.Add(userSession);
+            userSession.Id = SessionIdGenerator.GenerateSessionId();
 
 
-            UserSessionCreated eventCreateSession = new(request.Id, request.SessionName, userSession.ValidTo);
+            
+            //userSession.Id = placeholderId;
+            //userSession.Id = placeholderId;
+            /*userSession.UserId = placeholderId;*/
+
+            //string SessionGuid = SessionIdGenerator.GenerateSessionId();
+
+            UserSessionCreated eventCreateSession = new(userSession.Id, userSession.ValidTo, userSession.UserId);
             await _mediator.Publish(eventCreateSession, cancellationToken);
-            _dbContext.SaveChanges();
+
+
+
+            await _dbContext.UserSessions.AddAsync(userSession);
+            await _dbContext.SaveChangesAsync();
+
+
             return Unit.Value;
 
         }

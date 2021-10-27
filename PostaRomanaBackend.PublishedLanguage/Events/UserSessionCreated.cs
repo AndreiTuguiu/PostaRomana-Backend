@@ -9,15 +9,16 @@ namespace PostaRomanaBackend.PublishedLanguage.Events
 {
     public class UserSessionCreated : INotification
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string SessionName { get; set; }
         public DateTime ValidTo { get; set; }
+        public int UserId { get; set; }
 
-        public UserSessionCreated(int Id, string SessionName, DateTime ValidTo)
+        public UserSessionCreated(Guid Id, DateTime ValidTo, int UserId)
         {
             this.Id = Id;
-            this.SessionName = SessionName;
             this.ValidTo = ValidTo;
+            this.UserId = UserId;
         }
     }
 }

@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 namespace PostaRomanaBackend.Models
 {
     public class UserSession
-    {
-        
-        public int Id { get; set; }
-        public string SessionName { get; set; }
+    {       
+        public Guid Id { get; set; }
         public DateTime ValidTo { get; set; }
-
-       
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
     }
 }
+

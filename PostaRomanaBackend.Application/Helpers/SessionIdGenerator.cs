@@ -8,10 +8,9 @@ namespace PostaRomanaBackend.Application
 {
     public class SessionIdGenerator
     {
-        public string GenerateSessionId()
+        public static Guid GenerateSessionId()
         {
-            var sessionId = new Guid().ToString();
-            return sessionId;
+            return Guid.NewGuid();
         }
     }
 }
