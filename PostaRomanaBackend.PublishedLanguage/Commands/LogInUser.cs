@@ -9,8 +9,7 @@ namespace PostaRomanaBackend.PublishedLanguage.Commands
 {
     public class LogInUser : IRequest
     {
-        public int Id { get; set; }
-        public string SessionName { get; set; }
-        public DateTime ValidTo { get; set; }
+        public int UserId { get; set; }
     }
 }
+

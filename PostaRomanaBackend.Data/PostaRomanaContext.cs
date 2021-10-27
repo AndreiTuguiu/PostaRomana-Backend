@@ -128,7 +128,7 @@ namespace PostaRomanaBackend.Data
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.SessionId);
+               
                 
               
             });
@@ -141,11 +141,15 @@ namespace PostaRomanaBackend.Data
                 entity.HasIndex(e => e.Id, "UQ_SessionId")
                             .IsUnique();
 
-                entity.Property(e => e.SessionName)
-                            .IsRequired()
-                            .HasMaxLength(50);
+                
                 entity.Property(e => e.ValidTo).HasColumnType("datetime");
-                            
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.UserSessions)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserSessions_Users");
+
             });
 
             OnModelCreatingPartial(modelBuilder);
