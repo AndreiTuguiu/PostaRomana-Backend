@@ -51,5 +51,32 @@ namespace PostaRomanaBackend.Application.CommandHandlers
             return Unit.Value;
         }
 
+        public async Task<Unit> HandleRecovery(UpdateTokenStatusCommand request, CancellationToken cancellationToken)
+        {
+            Register register = _dbContext.Registers.Include(x => x.User).FirstOrDefault(x => x.Token == request.Token);
+
+            if (register == null)
+            {
+                throw new Exception("Token not found");
+            }
+
+            if (register.ValidTo.CompareTo(DateTime.Now) < 0 && register.TokenStatus == "activeRecovery") // a trecut timpul?
+            {
+                register.TokenStatus = "expiredRecovery";
+                //contu ramane inactive, cum a fost creeat
+            }
+            else
+            {
+                register.TokenStatus = "usedRecovery";
+                register.User.IsActive = false;
+                //aici fac parola null? or what happens irl, account flagged as --changeable?
+            }
+
+            TokenStatusUpdated eventAccountEvent = new(request.Token);
+            await _mediator.Publish(eventAccountEvent, cancellationToken);
+            _dbContext.SaveChanges();
+            return Unit.Value;
+        }
+
     }
 }

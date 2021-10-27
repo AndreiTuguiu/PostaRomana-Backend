@@ -40,5 +40,29 @@ namespace PostaRomanaBackend.Application.Helpers
 
             smtpClient.Send(mailMessage);
         }
+        //am mai adaugat o metoda statica aproape la fel ca prima, insa asta mentioneaza ca tokenul este pentru password recovery
+        public static void sendRecoveryEmail(string to, string token)
+        {
+            SmtpClient smtpClient = new SmtpClient()
+            {
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(email, password),
+                EnableSsl = true,
+                Port = port,
+                Host = host
+            };
+
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress(email),
+                Subject = "Password recovery token - Event App",
+                Body = $"<h1>This is your password recovery token: {token}</h1>",
+                IsBodyHtml = true,
+
+            };
+            mailMessage.To.Add(to);
+
+            smtpClient.Send(mailMessage);
+        }
     }
 }

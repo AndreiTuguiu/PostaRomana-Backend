@@ -73,5 +73,21 @@ namespace PostaRomanaBackend.WebApi.Controllers
             var result = await _mediator.Send(query, cancellationToken);
             return result;
         }
+
+        [HttpPost]
+        [Route("CreatePasswordRegister")]
+        public async Task<string> CreateAccount(MakePasswordRecoveryRegisterCommand ma, CancellationToken cancellationToken)
+        {
+            await _mediator.Send(ma, cancellationToken);
+            return "OK";
+        }
+
+        [HttpPost]
+        [Route("ChangeUserPassword")]
+        public async Task<string> ChangePassword(ChangePasswordCommand ma, CancellationToken cancellationToken)
+        {
+            await _mediator.Send(ma, cancellationToken);
+            return "OK";
+        }
     }
 }
