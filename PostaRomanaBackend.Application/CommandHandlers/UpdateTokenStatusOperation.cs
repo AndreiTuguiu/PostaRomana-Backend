@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using PostaRomanaBackend.Data;
 using PostaRomanaBackend.Models;
 using PostaRomanaBackend.PublishedLanguage.Commands;
@@ -22,23 +23,26 @@ namespace PostaRomanaBackend.Application.CommandHandlers
             _mediator = mediator;
             _dbContext = dbContext;
         }
-
+        //metoda se apeleaza ori dupa 24 de ore singura din frontend, sau la apasarea butonului register mai devreme, face chestii diferite
         public async Task<Unit> Handle(UpdateTokenStatusCommand request, CancellationToken cancellationToken)
         {
-            Register register = _dbContext.Registers.FirstOrDefault(x => x.Token == request.Token);
+            Register register = _dbContext.Registers.Include(x => x.User).FirstOrDefault(x => x.Token == request.Token);
 
             if (register == null)
             {
                 throw new Exception("Token not found");
             }
-
-            if (register.ValidTo.CompareTo(DateTime.Now) < 0)
+            
+            if (register.ValidTo.CompareTo(DateTime.Now) < 0) // a trecut timpul?
             {
                 register.TokenStatus = "expired";
+                //contu ramane inactive, cum a fost creeat
             }
             else
             {
                 register.TokenStatus = "used";
+                register.User.IsActive = true;
+                //User.isActive devine true
             }
 
             TokenStatusUpdated eventAccountEvent = new(request.Token);

@@ -41,7 +41,7 @@ namespace PostaRomanaBackend.Application.CommandHandlers
             {
                 Token = token,
                 TokenStatus = "active",
-                ValidTo = DateTime.Now.AddDays(1)
+                ValidTo = DateTime.Now.AddMinutes(1)
             };
             user.Registers.Add(reg);
 

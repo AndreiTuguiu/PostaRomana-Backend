@@ -13,7 +13,7 @@ namespace PostaRomanaBackend.Application.Helpers
     public class EmailSender
     {
         private static string email = "ioana.nicolae@totalsoft.ro"; //"posta.romana33@gmail.com";
-        private static string password = "-"; //"Posta.romana33!";
+        private static string password = "Lamultiani111"; //"Posta.romana33!";
         private static string host = "mailer14.totalsoft.local"; //"smtp.gmail.com";
         private static int port = 587;
 
