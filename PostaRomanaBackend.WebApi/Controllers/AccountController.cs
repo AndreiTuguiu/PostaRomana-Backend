@@ -64,5 +64,14 @@ namespace PostaRomanaBackend.WebApi.Controllers
             var result = await _mediator.Send(query, cancellationToken);
             return result;
         }
+
+        
+        [HttpGet]
+        [Route("CompareCredentials")]
+        public async Task<bool> CompareCredentials([FromQuery] CompareUserCredentials.Query query, CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return result;
+        }
     }
 }
