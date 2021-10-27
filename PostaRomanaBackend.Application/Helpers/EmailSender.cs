@@ -12,18 +12,20 @@ namespace PostaRomanaBackend.Application.Helpers
 {
     public class EmailSender
     {
-        private static string email = "posta.romana33@gmail.com";
-        private static string password = "Posta.romana33!";
-        private static string host = "smtp.gmail.com";
+        private static string email = "ioana.nicolae@totalsoft.ro"; //"posta.romana33@gmail.com";
+        private static string password = "-"; //"Posta.romana33!";
+        private static string host = "mailer14.totalsoft.local"; //"smtp.gmail.com";
         private static int port = 587;
 
         public static void sendEmail(string to, string token)
         {
-            SmtpClient smtpClient = new SmtpClient(host, port)
+            SmtpClient smtpClient = new SmtpClient()
             {
+                UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(email, password),
                 EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network
+                Port = port,
+                Host = host
             };
 
             var mailMessage = new MailMessage
@@ -32,6 +34,7 @@ namespace PostaRomanaBackend.Application.Helpers
                 Subject = "Token for your registration",
                 Body = $"<h1>Hello, this is the token: {token}</h1>",
                 IsBodyHtml = true,
+
             };
             mailMessage.To.Add(to);
 

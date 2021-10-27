@@ -37,14 +37,14 @@ namespace PostaRomanaBackend.Application.CommandHandlers
             string token = FiveCharacterCodeGenerator.GenerateToken();
             EmailSender.sendEmail(user.Email, token);
 
-            user.Registers.Add(new Register()
+            var reg = new Register
             {
                 Token = token,
-                TokenStatus = "...",
-
-                // Id ??? posibil sa se genereze automat
+                TokenStatus = "active",
                 ValidTo = DateTime.Now.AddDays(1)
-            });
+            };
+            user.Registers.Add(reg);
+
 
             await _dbContext.Users.AddAsync(user);
             await _dbContext.SaveChangesAsync();

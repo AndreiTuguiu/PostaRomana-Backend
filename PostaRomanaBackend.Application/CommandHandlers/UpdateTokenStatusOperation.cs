@@ -32,7 +32,14 @@ namespace PostaRomanaBackend.Application.CommandHandlers
                 throw new Exception("Token not found");
             }
 
-            register.TokenStatus = "noul status";
+            if (register.ValidTo.CompareTo(DateTime.Now) < 0)
+            {
+                register.TokenStatus = "expired";
+            }
+            else
+            {
+                register.TokenStatus = "used";
+            }
 
             TokenStatusUpdated eventAccountEvent = new(request.Token);
             await _mediator.Publish(eventAccountEvent, cancellationToken);

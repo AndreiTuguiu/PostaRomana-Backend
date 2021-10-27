@@ -30,10 +30,10 @@ namespace PostaRomanaBackend.Application.CommandHandlers
                 SessionName = request.SessionName,
                 ValidTo = request.ValidTo
 
-        };
+            };
 
             _dbContext.UserSessions.Add(userSession);
-            
+
 
             UserSessionCreated eventCreateSession = new(request.Id, request.SessionName, userSession.ValidTo);
             await _mediator.Publish(eventCreateSession, cancellationToken);
