@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PostaRomanaBackend.Application.Queries
 {
-    public class ListOfCities
+    public class GetCities
     {
         public class Validator : AbstractValidator<Query>
         {
@@ -46,7 +46,7 @@ namespace PostaRomanaBackend.Application.Queries
 
             public async Task<List<City>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var result = await _locationRepository.GetCityListByCounty(request.CountyId, cancellationToken);
+                var result = await _locationRepository.GetCityList(cancellationToken);
                 return result;
             }
 

@@ -57,5 +57,21 @@ namespace PostaRomanaBackend.WebApi.Controllers
             var result = await _mediator.Send(query, cancellationToken);
             return result;
         }
+
+        [HttpGet]
+        [Route("GetfCounties")]
+        public async Task<List<County>> GetCounties([FromQuery] GetCounties.Query query, CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return result;
+        }
+
+        [HttpGet]
+        [Route("GetfCities")]
+        public async Task<List<City>> GetCities([FromQuery] GetCities.Query query, CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return result;
+        }
     }
 }

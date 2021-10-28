@@ -16,6 +16,29 @@ namespace PostaRomanaBackend.Data.Repositories
         {
             _dbContext = dbContext;
         }
+        public async Task<List<County>> GetCountyList(CancellationToken cancellationToken)
+        {
+            var _county = _dbContext.Counties.Select(x => new County
+            {
+                Id = x.Id,
+                Name = x.Name,
+                CountryId= x.CountryId
+            }).ToList();
+
+            return await Task.FromResult(_county);
+        }
+
+        public async Task<List<City>> GetCityList(CancellationToken cancellationToken)
+        {
+            var _city = _dbContext.Cities.Select(x => new City
+            {
+                Id = x.Id,
+                Name = x.Name,
+                CountyId=x.CountyId
+            }).ToList();
+
+            return await Task.FromResult(_city);
+        }
         public async Task<List<City>> GetCityListByCounty(int CountyId, CancellationToken cancellationToken)
         {
             var cityByCounty = _dbContext.Cities.Where(x => x.CountyId == CountyId).Select(x => new City
