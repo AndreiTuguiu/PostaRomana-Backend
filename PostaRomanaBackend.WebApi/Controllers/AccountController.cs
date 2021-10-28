@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using PostaRomanaBackend.Application.Queries;
+
 using PostaRomanaBackend.PublishedLanguage.Commands;
 using PostaRomanaBackend.PublishedLanguage.Events;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -88,6 +91,14 @@ namespace PostaRomanaBackend.WebApi.Controllers
         {
             await _mediator.Send(ma, cancellationToken);
             return "OK";
+        }
+
+        [HttpGet]
+        [Route("LogTheUser")]
+        public async Task<DateTime> LogInUser([FromQuery] LogInOperations.Query query, CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return result;
         }
     }
 }
