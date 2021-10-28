@@ -35,14 +35,6 @@ namespace PostaRomanaBackend.WebApi.Controllers
             return "OK";
         }
 
-        [HttpGet]
-        [Route("ListOfEvents")]
-        // query: http://localhost:5000/api/Account/ListOfEvents?PersonId=1&Cnp=1961231..
-        // route: http://localhost:5000/api/Account/ListOfAccounts/1/1961231..
-        public async Task<List<Event>> GetListOfEvents([FromQuery] EventQueryCommand query, CancellationToken cancellationToken)
-        {
-            var result = await _mediator.Send(query, cancellationToken);
-            return result;
-        }
+        
     }
 }

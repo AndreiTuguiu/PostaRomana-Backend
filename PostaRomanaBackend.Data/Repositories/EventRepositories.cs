@@ -33,7 +33,7 @@ namespace PostaRomanaBackend.Data.Repositories
 
             if (!string.IsNullOrEmpty(EventName))
             {
-                query = query.Where(x => x.Name == EventName);
+                query = query.Where(x => x.Name.Contains(EventName));
             }
 
             if (EventType != null)

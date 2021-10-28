@@ -17,6 +17,13 @@ namespace PostaRomanaBackend.Models
         public int? CityId { get; set; }
         public string AddressLine { get; set; }
 
+        public virtual Country Country { get; set; }
+        public virtual County County { get; set; }
+        public virtual City City { get; set; }
+
         public virtual ICollection<Event> Events { get; set; }
+        
+        
+
     }
 }

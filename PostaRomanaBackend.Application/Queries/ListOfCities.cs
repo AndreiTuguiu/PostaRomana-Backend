@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PostaRomanaBackend.Application.Queries
 {
-    public class ListOfCountries
+    public class ListOfCities
     {
         public class Validator : AbstractValidator<Query>
         {
@@ -30,12 +30,12 @@ namespace PostaRomanaBackend.Application.Queries
         }
 
 
-        public class Query : IRequest<List<Country>>
+        public class Query : IRequest<List<City>>
         {
-           
+            public int CountyId { get; set; }
         }
 
-        public class QueryHandler : IRequestHandler<Query, List<Country>>
+        public class QueryHandler : IRequestHandler<Query, List<City>>
         {
             private readonly ILocationRepository _locationRepository;
 
@@ -44,9 +44,9 @@ namespace PostaRomanaBackend.Application.Queries
                 _locationRepository = locationRepository;
             }
 
-            public async Task<List<Country>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<List<City>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var result = await _locationRepository.GetCountryList(cancellationToken);
+                var result = await _locationRepository.GetCityListByCounty(request.CountyId, cancellationToken);
                 return result;
             }
         }
