@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\PostaRomanaBackend.Application\PostaRomanaBackend.Application.csproj" />
     <ProjectReference Include="..\PostaRomanaBackend.ExternalService\PostaRomanaBackend.ExternalService.csproj" />
+    <ProjectReference Include="..\PostaRomanaBackend.Models\PostaRomanaBackend.Models.csproj" />
     <ProjectReference Include="..\PostaRomanaBackend.PublishedLanguage\PostaRomanaBackend.PublishedLanguage.csproj" />
   </ItemGroup>
 
