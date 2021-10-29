@@ -9,12 +9,16 @@ using FluentValidation;
 using PostaRomanaBackend.Application.Queries;
 using PostaRomanaBackend.PublishedLanguage.Events;
 using PostaRomanaBackend.WebApi.Middleware;
-using PostaRomanaBackend.WebApi.MediatorPipeline;
+using PostaRomanaBackend.Application.CommandHandlers;
+using Abstractions;
+using PostaRomanaBackend.Data.Repositories;
 using PostaRomanaBackend.ExternalService;
+using PostaRomanaBackend.WebApi.MediatorPipeline;
+using PostaRomanaBackend.WebApi;
 using PostaRomanaBackend.Data;
 using PostaRomanaBackend.WebApi.Swagger;
 
-namespace PostaRomanaBackend.WebApi
+namespace RatingSystem.WebApi
 {
     public class Startup
     {
@@ -36,8 +40,10 @@ namespace PostaRomanaBackend.WebApi
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
 
-            services.AddMediatR(new[] { typeof(ListOfEvents).Assembly, typeof(AllEventsHandler).Assembly }); // get all IRequestHandler and INotificationHandler classes
             
+            services.AddMediatR(new[] { typeof(ListOfEvents).Assembly, typeof(AllEventsHandler).Assembly }); // get all IRequestHandler and INotificationHandler classes
+            services.AddScoped(typeof(IEventRepository), typeof(EventRepositories));
+            services.AddScoped(typeof(ILocationRepository), typeof(LocationRepository));
 
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestPreProcessorBehavior<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestPostProcessorBehavior<,>));

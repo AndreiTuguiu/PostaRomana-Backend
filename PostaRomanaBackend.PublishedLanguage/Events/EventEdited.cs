@@ -11,6 +11,7 @@ namespace PostaRomanaBackend.PublishedLanguage.Events
         public int LocationId { get; set; }
         public decimal? Cost { get; set; }
         public int EventTypeId { get; set; }
+        public string Description { get; set; }
 
     }
 }

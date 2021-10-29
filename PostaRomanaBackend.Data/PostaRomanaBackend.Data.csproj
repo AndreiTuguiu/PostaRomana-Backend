@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Abstractions\Abstractions.csproj" />
     <ProjectReference Include="..\PostaRomanaBackend.Models\PostaRomanaBackend.Models.csproj" />
   </ItemGroup>
 

@@ -1,8 +1,13 @@
-﻿using FluentValidation;
+﻿using Abstractions;
+using FluentValidation;
 using MediatR;
 using PostaRomanaBackend.Data;
+using PostaRomanaBackend.Data.Repositories;
+using PostaRomanaBackend.Models;
+using PostaRomanaBackend.PublishedLanguage.Commands;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,7 +15,7 @@ namespace PostaRomanaBackend.Application.Queries
 {
     public class ListOfEvents
     {
-        public class Validator : AbstractValidator<Query>
+        public class Validator : AbstractValidator<EventQueryCommand>
         {
             public Validator(PostaRomanaContext _dbContext)
             {
@@ -26,39 +31,35 @@ namespace PostaRomanaBackend.Application.Queries
         }
        
 
-        public class Query : IRequest<List<Model>>
-        {
-            public string Name { get; set; }
-            public DateTime StartDate { get; set; }
-            public DateTime EndDate { get; set; }
-        }
+        //public class Query : IRequest<List<Event>>
+        //{
+        //    public int? EventTypeId { get; set; }
+        //    public string EventName { get; set; }
+        //    public DateTime? StartDate { get; set; }
+        //    public DateTime? EndDate { get; set; }
+        //    public int? CountryId { get; set; }
+        //    public int? CountyId { get; set; }
+        //    public int? CityId { get; set; }
+        //}
 
-        public class QueryHandler : IRequestHandler<Query, List<Model>>
+        public class QueryHandler : IRequestHandler<EventQueryCommand, List<Event>>
         {
-            private readonly PostaRomanaContext _dbContext;
+            //private readonly PostaRomanaContext _dbContext;
+            private readonly IEventRepository _eventRepo;
 
-            public QueryHandler(PostaRomanaContext dbContext)
+            public QueryHandler(IEventRepository eventRepo)
             {
-                _dbContext = dbContext;
+                _eventRepo = eventRepo;
             }
 
-            public Task<List<Model>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<List<Event>> Handle(EventQueryCommand request, CancellationToken cancellationToken)
             {
-                // TODO: implement logic
-                return null;
+
+                var result = _eventRepo.GetEventList(request.EventName, request.EventTypeId, request.StartDate, request.EndDate, request.CountryId, request.CountyId, request.CityId, cancellationToken).Result;
+                return result;
             }
         }
 
-        public class Model
-        {
-            public int Id { get; set; }
-            public string Name { get; set; }
-            public DateTime StartDate { get; set; }
-            public DateTime EndDate { get; set; }
-            public int LocationId { get; set; }
-            public int OrganizerId { get; set; }
-            public decimal? Cost { get; set; }
-            public int EventTypeId { get; set; }
-        }
+        
     }
 }

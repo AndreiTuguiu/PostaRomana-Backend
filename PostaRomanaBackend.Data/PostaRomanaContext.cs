@@ -19,6 +19,9 @@ namespace PostaRomanaBackend.Data
         public virtual DbSet<Register> Registers { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserSession> UserSessions { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<County> Counties { get; set; }
+        public virtual DbSet<City> Cities { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -49,6 +52,8 @@ namespace PostaRomanaBackend.Data
                     .HasMaxLength(50);
 
                 entity.Property(e => e.StartDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Description).HasMaxLength(300);
 
                 entity.HasOne(d => d.Location)
                     .WithMany(p => p.Events)
@@ -81,6 +86,24 @@ namespace PostaRomanaBackend.Data
                 entity.Property(e => e.Id);
 
                 entity.Property(e => e.AddressLine).HasMaxLength(50);
+
+                entity.HasOne(d => d.Country)
+                    .WithMany(p => p.Locations)
+                    .HasForeignKey(d => d.CountryId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Locations_Countries");
+
+                entity.HasOne(d => d.County)
+                    .WithMany(p => p.Locations)
+                    .HasForeignKey(d => d.CountyId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Locations_Counties");
+
+                entity.HasOne(d => d.City)
+                    .WithMany(p => p.Locations)
+                    .HasForeignKey(d => d.CountryId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Locations_Cities");
             });
 
             modelBuilder.Entity<Register>(entity =>
@@ -150,6 +173,44 @@ namespace PostaRomanaBackend.Data
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UserSessions_Users");
 
+            });
+
+            modelBuilder.Entity<Country>(entity =>
+            {
+                entity.ToTable("Countries");
+
+                entity.Property(e => e.Id);
+                entity.Property(e => e.Name);
+            });
+
+            modelBuilder.Entity<County>(entity =>
+            {
+                entity.ToTable("Counties");
+
+                entity.Property(e => e.Id);
+
+                entity.Property(e => e.Name);
+
+                entity.HasOne(d => d.Country)
+                    .WithMany(p => p.Counties)
+                    .HasForeignKey(d => d.CountryId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Counties_Countries");
+            });
+
+            modelBuilder.Entity<City>(entity =>
+            {
+                entity.ToTable("Cities");
+
+                entity.Property(e => e.Id);
+
+                entity.Property(e => e.Name);
+
+                entity.HasOne(d => d.County)
+                    .WithMany(p => p.Cities)
+                    .HasForeignKey(d => d.CountyId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Cities_Counties");
             });
 
             OnModelCreatingPartial(modelBuilder);

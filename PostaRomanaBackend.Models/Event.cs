@@ -20,6 +20,7 @@ namespace PostaRomanaBackend.Models
         public int OrganizerId { get; set; }
         public decimal? Cost { get; set; }
         public int EventTypeId { get; set; }
+        public string Description { get; set; }
 
         public virtual Location Location { get; set; }
         public virtual ICollection<EventXuser> EventXusers { get; set; }
