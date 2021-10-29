@@ -22,6 +22,7 @@ namespace PostaRomanaBackend.Data
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<County> Counties { get; set; }
         public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<EventTypeDictionary> EventTypeDictionaries { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -45,7 +46,11 @@ namespace PostaRomanaBackend.Data
 
                 entity.Property(e => e.EndDate).HasColumnType("datetime");
 
-                entity.Property(e => e.EventTypeId).HasColumnName("EventTypeID");
+                entity.HasOne(d => d.EventTypeDictionary)
+                    .WithMany(p => p.Events)
+                    .HasForeignKey(d => d.EventTypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Events_EventTypeDictionary");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -211,6 +216,15 @@ namespace PostaRomanaBackend.Data
                     .HasForeignKey(d => d.CountyId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Cities_Counties");
+            });
+
+            modelBuilder.Entity<EventTypeDictionary>(entity =>
+            {
+                entity.ToTable("EventTypeDictionaries");
+
+                entity.Property(e => e.Id);
+
+                entity.Property(e => e.EventTypeName);
             });
 
             OnModelCreatingPartial(modelBuilder);

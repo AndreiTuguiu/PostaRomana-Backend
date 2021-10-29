@@ -73,5 +73,13 @@ namespace PostaRomanaBackend.WebApi.Controllers
             var result = await _mediator.Send(query, cancellationToken);
             return result;
         }
+
+        [HttpGet]
+        [Route("GetfTypes")]
+        public async Task<List<EventTypeDictionary>> GetEventTypes([FromQuery] GetEventType.Query query, CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return result;
+        }
     }
 }

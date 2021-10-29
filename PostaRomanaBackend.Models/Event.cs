@@ -23,6 +23,7 @@ namespace PostaRomanaBackend.Models
         public string Description { get; set; }
 
         public virtual Location Location { get; set; }
+        public virtual EventTypeDictionary EventTypeDictionary { get; set; }
         public virtual ICollection<EventXuser> EventXusers { get; set; }
     }
 }

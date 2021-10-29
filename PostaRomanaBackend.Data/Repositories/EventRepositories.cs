@@ -64,5 +64,16 @@ namespace PostaRomanaBackend.Data.Repositories
             var result = await query.ToListAsync();
             return result;
         }
+
+        public async Task<List<EventTypeDictionary>> GetEventTypes(CancellationToken cancellationToken)
+        {
+            var _types = _dbContext.EventTypeDictionaries.Select(x => new EventTypeDictionary
+            {
+                Id=x.Id,
+                EventTypeName=x.EventTypeName
+            }).ToList();
+
+            return await Task.FromResult(_types);
+        }
     }
 }
