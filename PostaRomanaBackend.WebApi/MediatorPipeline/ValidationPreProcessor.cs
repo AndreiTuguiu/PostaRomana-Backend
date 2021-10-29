@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using FluentValidation;
 using MediatR.Pipeline;
 
-namespace RatingSystem.WebApi.MediatorPipeline
+namespace PostaRomanaBackend.WebApi.MediatorPipeline
 {
     public class ValidationPreProcessor<TRequest> : IRequestPreProcessor<TRequest>
     {

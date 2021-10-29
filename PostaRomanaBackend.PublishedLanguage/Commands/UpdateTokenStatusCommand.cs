@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace PostaRomanaBackend.PublishedLanguage.Commands
 {
-    public class LogInUser : IRequest
+   public class UpdateTokenStatusCommand : IRequest
     {
-        public int UserId { get; set; }
-
-        //public DateTime ValidTo { get; set; }
+        public string Token { get; set; }
     }
 }
-

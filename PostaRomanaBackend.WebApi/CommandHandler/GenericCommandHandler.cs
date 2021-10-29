@@ -3,7 +3,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RatingSystem.WebApi.CommandHandler
+namespace PostaRomanaBackend.WebApi.CommandHandler
 {
     public class GenericCommandHandler : MediatR.IRequestHandler<MediatR.IRequest>
     {

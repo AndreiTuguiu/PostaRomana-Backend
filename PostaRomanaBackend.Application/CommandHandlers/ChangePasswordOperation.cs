@@ -13,40 +13,24 @@ using System.Threading.Tasks;
 
 namespace PostaRomanaBackend.Application.CommandHandlers
 {
-    public class CreateAccountOperation : IRequestHandler<MakeAccountCommand>
+    public class ChangePasswordOperation : IRequestHandler<ChangePasswordCommand>
     {
         private readonly IMediator _mediator;
         private readonly PostaRomanaContext _dbContext;
 
-        public CreateAccountOperation(IMediator mediator, PostaRomanaContext dbContext)
+        public ChangePasswordOperation(IMediator mediator, PostaRomanaContext dbContext)
         {
             _mediator = mediator;
             _dbContext = dbContext;
         }
-        public async Task<Unit> Handle(MakeAccountCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(ChangePasswordCommand request, CancellationToken cancellationToken)
         {
-            var user = new User
-            {
-                Username = request.Username,
-                Password = request.Password,
-                Email = request.Email,
-                FullName = request.FullName,
-                IsActive = false,
-            };
-
-            string token = FiveCharacterCodeGenerator.GenerateToken();
-            EmailSender.sendEmail(user.Email, token);
-
-            var reg = new Register
-            {
-                Token = token,
-                TokenStatus = "active",
-                ValidTo = DateTime.Now.AddMinutes(1)
-            };
-            user.Registers.Add(reg);
+            var person = _dbContext.Users.Where(x => x.Email == request.Email).FirstOrDefault();
 
 
-            await _dbContext.Users.AddAsync(user);
+            person.Password = request.Password;
+
+
             await _dbContext.SaveChangesAsync();
 
             //AccountRegisterMade eventAccountEvent = new(request.Username, request.Password, request.Email, request.FullName, false);

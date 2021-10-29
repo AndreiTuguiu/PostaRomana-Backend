@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace PostaRomanaBackend.PublishedLanguage.Commands
 {
-    public class LogInUser : IRequest
+    public class ChangePasswordCommand : IRequest
     {
-        public int UserId { get; set; }
-
-        //public DateTime ValidTo { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+       
     }
 }
-

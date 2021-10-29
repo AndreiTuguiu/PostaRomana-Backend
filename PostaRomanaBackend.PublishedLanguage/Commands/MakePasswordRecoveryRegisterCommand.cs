@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using PostaRomanaBackend.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,9 @@ using System.Threading.Tasks;
 
 namespace PostaRomanaBackend.PublishedLanguage.Commands
 {
-    public class LogInUser : IRequest
+    public class MakePasswordRecoveryRegisterCommand : IRequest
     {
-        public int UserId { get; set; }
-
-        //public DateTime ValidTo { get; set; }
+        public string Email { get; set; }
+        
     }
 }
-

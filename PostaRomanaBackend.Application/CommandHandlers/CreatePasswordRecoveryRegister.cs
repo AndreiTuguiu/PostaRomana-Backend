@@ -13,31 +13,34 @@ using System.Threading.Tasks;
 
 namespace PostaRomanaBackend.Application.CommandHandlers
 {
-    public class CreateAccountOperation : IRequestHandler<MakeAccountCommand>
+    public class CreatePasswordRecoveryRegister : IRequestHandler<MakePasswordRecoveryRegisterCommand>
     {
         private readonly IMediator _mediator;
         private readonly PostaRomanaContext _dbContext;
 
-        public CreateAccountOperation(IMediator mediator, PostaRomanaContext dbContext)
+        public CreatePasswordRecoveryRegister(IMediator mediator, PostaRomanaContext dbContext)
         {
             _mediator = mediator;
             _dbContext = dbContext;
         }
-        public async Task<Unit> Handle(MakeAccountCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(MakePasswordRecoveryRegisterCommand request, CancellationToken cancellationToken)
         {
-            var user = new User
-            {
-                Username = request.Username,
-                Password = request.Password,
-                Email = request.Email,
-                FullName = request.FullName,
-                IsActive = false,
-            };
+            var person = _dbContext.Users.Where(x => x.Email == request.Email).FirstOrDefault();
 
             string token = FiveCharacterCodeGenerator.GenerateToken();
-            EmailSender.sendEmail(user.Email, token);
+            EmailSender.sendRecoveryEmail(person.Email, token);
 
-            var reg = new Register
+            var register = new Register
+            {
+                TokenStatus = "activeRecovery",
+                ValidTo = DateTime.Now.AddMinutes(10),
+                UserId = person.Id,
+                Token=token,
+                User=person 
+            };
+
+
+            /*var reg = new Register
             {
                 Token = token,
                 TokenStatus = "active",
@@ -47,6 +50,14 @@ namespace PostaRomanaBackend.Application.CommandHandlers
 
 
             await _dbContext.Users.AddAsync(user);
+            await _dbContext.SaveChangesAsync();
+            EmailSender.sendEmail(user.Email, token);*/
+
+            
+            await _dbContext.Registers.AddAsync(register);
+
+
+            //await _dbContext.Users.AddAsync(user);
             await _dbContext.SaveChangesAsync();
 
             //AccountRegisterMade eventAccountEvent = new(request.Username, request.Password, request.Email, request.FullName, false);
