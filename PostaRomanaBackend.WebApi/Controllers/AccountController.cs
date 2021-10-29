@@ -84,7 +84,7 @@ namespace PostaRomanaBackend.WebApi.Controllers
             return "OK";
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("LogTheUser")]
         public async Task<DateTime> LogInUser([FromQuery] LogInOperations.Query query, CancellationToken cancellationToken)
         {
