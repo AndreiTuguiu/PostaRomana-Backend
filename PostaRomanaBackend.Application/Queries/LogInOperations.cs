@@ -49,8 +49,8 @@ namespace PostaRomanaBackend.Application.Queries
 
             public async Task<DateTime> Handle(Query request, CancellationToken cancellationToken)
             {
-                var person = _dbContext.Users.Where(x => x.Username == request.Username && x.Password == request.Password).FirstOrDefault();
-
+                //var person = _dbContext.Users.Where(x => x.Username == request.Username && x.Password == request.Password).FirstOrDefault();
+                var person = _dbContext.Users.FirstOrDefault(x => x.Username == request.Username && x.Password == request.Password);
                 if (person.IsActive == false)
                 {
                     throw new Exception("This account hasn't been verified yet.");
