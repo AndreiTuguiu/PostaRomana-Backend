@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Abstractions;
+using Microsoft.AspNetCore.Mvc;
 using PostaRomanaBackend.Application.Queries;
 using PostaRomanaBackend.Models;
 using PostaRomanaBackend.PublishedLanguage.Commands;
@@ -13,9 +14,11 @@ namespace PostaRomanaBackend.WebApi.Controllers
     public class EventController : ControllerBase
     {
         private readonly MediatR.IMediator _mediator;
-        public EventController(MediatR.IMediator mediator)
+        private readonly ILocationRepository _locationRepository;
+        public EventController(MediatR.IMediator mediator,ILocationRepository locationRepository)
         {
             _mediator = mediator;
+            _locationRepository = locationRepository;
         }
 
         [HttpPost]
@@ -79,6 +82,38 @@ namespace PostaRomanaBackend.WebApi.Controllers
         public async Task<List<EventTypeDictionary>> GetEventTypes([FromQuery] GetEventType.Query query, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(query, cancellationToken);
+            return result;
+        }
+
+        [HttpGet]
+        [Route("GetCountryById/{LocationId}")]
+        public async Task<List<Country>> GetCountryById([FromRoute] int LocationId, CancellationToken cancellationToken)
+        {
+            var result = await _locationRepository.GetCountryById(LocationId, cancellationToken);
+            return result;
+        }
+
+        [HttpGet]
+        [Route("GetCountyById/{LocationId}")]
+        public async Task<List<County>> GetCountyById([FromRoute] int LocationId, CancellationToken cancellationToken)
+        {
+            var result = await _locationRepository.GetCountyById(LocationId, cancellationToken);
+            return result;
+        }
+
+        [HttpGet]
+        [Route("GetCityById/{LocationId}")]
+        public async Task<List<City>> GetCityById([FromRoute] int LocationId, CancellationToken cancellationToken)
+        {
+            var result = await _locationRepository.GetCityById(LocationId, cancellationToken);
+            return result;
+        }
+
+        [HttpGet]
+        [Route("GetAddressById/{LocationId}")]
+        public async Task<List<Location>> GetAddressById([FromRoute] int LocationId, CancellationToken cancellationToken)
+        {
+            var result = await _locationRepository.GetAddressById(LocationId, cancellationToken);
             return result;
         }
     }

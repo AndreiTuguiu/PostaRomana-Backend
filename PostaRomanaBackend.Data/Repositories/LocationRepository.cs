@@ -1,4 +1,5 @@
 ﻿using Abstractions;
+using Microsoft.EntityFrameworkCore;
 using PostaRomanaBackend.Models;
 using System;
 using System.Collections.Generic;
@@ -70,5 +71,57 @@ namespace PostaRomanaBackend.Data.Repositories
 
             return await Task.FromResult(countyByCountry);
         }
+
+        public Task<List<Country>> GetCountryById(int LocationId, CancellationToken cancellationToken)
+        {
+            var country = _dbContext.Events
+                 .Include(x => x.Location)
+                 .Include(x => x.Location.Country)
+                 .Where(x => x.LocationId == LocationId).Select(x => new Country
+                 {
+                     Name = x.Location.Country.Name,
+                     Id=x.Location.Country.Id
+                 }).ToList();
+            return Task.FromResult(country);
+        }
+
+        public Task<List<County>> GetCountyById(int LocationId, CancellationToken cancellationToken)
+        {
+            var county = _dbContext.Events
+                 .Include(x => x.Location)
+                 .Include(x => x.Location.County)
+                 .Where(x => x.LocationId == LocationId).Select(x => new County
+                 {
+                     Name = x.Location.County.Name,
+                     Id = x.Location.County.Id
+                 }).ToList();
+            return Task.FromResult(county);
+        }
+
+        public Task<List<City>> GetCityById(int LocationId, CancellationToken cancellationToken)
+        {
+            var city = _dbContext.Events
+                 .Include(x => x.Location)
+                 .Include(x => x.Location.City)
+                 .Where(x => x.LocationId == LocationId).Select(x => new City
+                 {
+                     Name = x.Location.City.Name,
+                     Id = x.Location.City.Id
+                 }).ToList();
+            return Task.FromResult(city);
+        }
+
+        public Task<List<Location>> GetAddressById(int LocationId, CancellationToken cancellationToken)
+        {
+            var adress = _dbContext.Events
+                 .Include(x => x.Location)
+                 .Include(x => x.Location.City)
+                 .Where(x => x.LocationId == LocationId).Select(x => new Location
+                 {
+                     AddressLine=x.Location.AddressLine
+                 }).ToList();
+            return Task.FromResult(adress);
+        }
     }
+    
 }

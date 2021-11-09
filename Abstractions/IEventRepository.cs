@@ -12,5 +12,6 @@ namespace Abstractions
     {
         public Task<List<Event>> GetEventList(string EventName, int? EventType, DateTime? Start, DateTime? End, int? CountryId, int? CountyId, int? CityId, CancellationToken cancellationToken);
         public Task<List<EventTypeDictionary>> GetEventTypes(CancellationToken cancellationToken);
+
     }
 }
